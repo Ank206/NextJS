@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
@@ -15,11 +15,44 @@ const page = () => {
     password: "",
   });
 
-  const onSignUp = async () => {};
+  const [buttonDisabled, setButtonDisabled] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
+
+  const onSignUp = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post("api/users/signup", user);
+      console.log("SignUp success", response.data);
+      router.push("/profile");
+    } catch (error: any) {
+      console.log("SignUp failed -", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (
+      user.email.length > 1 &&
+      user.password.length > 0 &&
+      user.username.length > 0
+    ) {
+      setButtonDisabled(false);
+    } else setButtonDisabled(true);
+  }, [user]);
 
   return (
     <div>
-      <h1 className="font-mono text-2xl m-2">Signup</h1>
+      <div className="flex">
+        <h1 className="font-mono text-2xl m-2">
+          {loading ? "Loading" : "Sign Up"}
+        </h1>
+        {loading ? (
+          <span className="loading loading-spinner text-success "></span>
+        ) : (
+          ""
+        )}
+      </div>
       <div className="flex flex-col m-2">
         <label className="font-mono" htmlFor="username">
           Username
@@ -53,7 +86,7 @@ const page = () => {
         />
       </div>
       <button className="btn btn-success m-2" onClick={onSignUp}>
-        Sign Up
+        {buttonDisabled ? "No Sign Up" : "Sign Up"}
       </button>
       <button className="btn btn-error m-2" onClick={handleHomeClick}>
         Home
