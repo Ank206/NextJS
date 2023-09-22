@@ -1,12 +1,20 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const page = () => {
   const router = useRouter();
   const handleHomeClick = () => {
     router.push("/");
   };
+
+  const [user, setUser] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const onLogin = async () => {};
 
   return (
     <div>
@@ -29,6 +37,9 @@ const page = () => {
           name="passwd"
         />
       </div>
+      <button className="btn btn-success m-2" onClick={onLogin}>
+        Login
+      </button>
       <button className="btn btn-error m-2" onClick={handleHomeClick}>
         Home
       </button>
