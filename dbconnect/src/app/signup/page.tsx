@@ -6,7 +6,11 @@ import axios from "axios";
 const page = () => {
   const router = useRouter();
   const handleHomeClick = () => {
-    router.push("/");
+    setLoading(true);
+    setTimeout(() => {
+      router.push("/");
+      setLoading(false);
+    }, 500);
   };
 
   const [user, setUser] = React.useState({
