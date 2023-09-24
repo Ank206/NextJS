@@ -27,14 +27,19 @@ const Profile = () => {
     }
   };
 
-  getUserDetails();
+  // getUserDetails();
+  useEffect(() => {
+    getUserDetails();
+  }, []);
 
   return (
     <div>
       <h1 className="font-mono text-2xl m-2">Profile Page</h1>
       <hr />
       <h1 className="font-mono text-2xl m-2">{uname ? `Hi,${uname}` : ``}</h1>
-      <h1 className="font-mono text-2xl m-2">This is your id: {data}</h1>
+      <h1 className="font-mono text-2xl m-2">
+        {data ? `This is your user id, ${data}` : ``}
+      </h1>
       <h1 className="font-mono text-2xl m-2">Thanks for Logginng in :)</h1>
       <button className="btn btn-error m-2" onClick={logout}>
         Logout
