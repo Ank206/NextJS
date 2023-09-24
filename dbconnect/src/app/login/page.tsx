@@ -26,8 +26,9 @@ const page = () => {
     try {
       setLoading(true);
       const response = await axios.post("/api/users/login", user);
-      console.log("Login Success", response.data);
-      router.push("/profile");
+      const res = await axios.get("/api/users/ind");
+      // console.log("Login Success", res.data.data);
+      router.push(`/profile`);
     } catch (error: any) {
       console.log("Login failed - ", error.message);
     } finally {
