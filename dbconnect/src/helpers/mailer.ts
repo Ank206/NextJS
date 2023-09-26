@@ -6,17 +6,18 @@
 import nodemailer from "nodemailer";
 import User from "@/models/usermodel";
 import bcryptjs from "bcryptjs";
+import { constrainedMemory } from "process";
 
 export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
 
     if (emailType === "VERIFY") {
-      await User.findById(userId, {
-        verifyToken: hashedToken,
-        verifyTokenExpiry: Date.now() + 36000000,
-      });
-      console.log(hashedToken);
+      const us = await User.findById(userId);
+      console.log("If block implemented");
+      console.log("Object ID is : ", userId);
+      console.log(us.data);
+      console.log("VERIFY - ", hashedToken);
     } else if (emailType === "RESET") {
       await User.findById(userId, {
         forgotPasswordSToken: hashedToken,

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+// import { sendEmail } from "@/helpers/mailer";
 
 const Profile = () => {
   const router = useRouter();
@@ -13,7 +14,12 @@ const Profile = () => {
     const res = await axios.get("/api/users/ind");
     console.log(res.data);
     setData(res.data.data._id);
-    setUname(res.data.data.username);
+    setUname(res.data.data.email);
+  };
+
+  const handleMail = async () => {
+    console.log("Handle Mail", uname, data);
+    // sendEmail({ uname, emailType: "VERIFY", userId: data });
   };
 
   const logout = async () => {
@@ -47,6 +53,7 @@ const Profile = () => {
       {/* <button className="btn btn-success m-2" onClick={getUserDetails}>
         Get User
       </button> */}
+      <button className="btn btn-success">Send Email</button>
     </div>
   );
 };
