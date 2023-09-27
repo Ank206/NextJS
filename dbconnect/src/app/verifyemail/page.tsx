@@ -34,9 +34,11 @@ const page = () => {
     <div>
       This is the email verification page
       <div>Is Verified : {verified ? "True" : "No"}</div>
-      <div>{error ? "Error encountered" : ""}</div>
+      <div>{error ? "Error encountered" : "Verification Done"}</div>
     </div>
   );
 };
 
 export default page;
+
+//!! Remember that Verifying Your Email doesnot mean that you are logged it is jsut on the top layer and thus you have no cookie of credentials of the user thus the next step from here is to redirect the user to a login page so he can LOGIN to the website
