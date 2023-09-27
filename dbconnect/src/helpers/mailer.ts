@@ -12,12 +12,18 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
 
-    if (emailType === "VERIFY") {
+    if (emailType == "VERIFY") {
       const us = await User.findById(userId);
-      console.log("If block implemented");
-      console.log("Object ID is : ", userId);
-      console.log(us.data);
-      console.log("VERIFY - ", hashedToken);
+
+      us.verifyToken = hashedToken;
+      us.verifyTokenExpiry = Date.now() + 3600000;
+
+      await us.save();
+
+      // console.log("If block implemented");
+      // console.log("Object ID is : ", userId);
+      // console.log(us);
+      // console.log("VERIFY - ", hashedToken);
     } else if (emailType === "RESET") {
       await User.findById(userId, {
         forgotPasswordSToken: hashedToken,
@@ -49,7 +55,6 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
     };
 
     const mailResponse = await transport.sendMail(mailOptions);
-
     return mailResponse;
   } catch (error: any) {
     console.log("Mailin Error - ", error);

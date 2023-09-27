@@ -4,11 +4,11 @@ import User from "@/models/usermodel";
 
 connect();
 
-export async function POST(req: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
-    const reqBody = await req.json();
+    const reqBody = await request.json();
     const { token } = reqBody;
-    console.log("Server", token);
+    // console.log("Server - ", token);
 
     const user = await User.findOne({
       verifyToken: token,
@@ -16,19 +16,24 @@ export async function POST(req: NextRequest) {
     });
 
     if (!user) {
-      console.log(token);
+      // console.log(token);
       return NextResponse.json(
         { error: "user Not found, invalid token" },
         { status: 400 }
       );
     }
 
-    console.log(user);
+    // console.log(user);
 
     user.isVerified = true;
     user.verifyToken = undefined;
     user.verifyTokenExpiry = undefined;
     await user.save();
+
+    return NextResponse.json({
+      message: "Email Verified Succesfuly",
+      success: true,
+    });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

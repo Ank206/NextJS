@@ -10,12 +10,12 @@ const page = () => {
 
   const verifyUserEmail = async () => {
     try {
-      await axios.post("/api/users/mail", { token });
+      await axios.post("/api/users/verifyemail", { token });
       setVerified(true);
     } catch (error: any) {
       setError(true);
-      console.log(token);
-      console.log(error.response.data);
+      // console.log(token);
+      // console.log(error.response.data);
     }
   };
 
