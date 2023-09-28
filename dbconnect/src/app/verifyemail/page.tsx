@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-const page: React.FC = () => {
+const Page: React.FC = () => {
   const [token, setToken] = useState("");
   const [verified, setVerified] = useState(false);
   const [error, setError] = useState(false);
@@ -32,13 +32,13 @@ const page: React.FC = () => {
 
   return (
     <div>
-      This is the email verification page
+      This is the email verification Page
       <div>Is Verified : {verified ? "True" : "No"}</div>
       <div>{error ? "Error encountered" : "Verification Done"}</div>
     </div>
   );
 };
 
-export default page;
+export default Page;
 
 //!! Remember that Verifying Your Email doesnot mean that you are logged it is jsut on the top layer and thus you have no cookie of credentials of the user thus the next step from here is to redirect the user to a login page so he can LOGIN to the website
