@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-const page = () => {
+const page: React.FC = () => {
   const router = useRouter();
   const handleHomeClick = () => {
     setLoading(true);

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 // import { sendEmail } from "@/helpers/mailer";
 
-const Profile = () => {
+const Profile: React.FC = () => {
   const router = useRouter();
   const [data, setData] = useState("");
   const [uname, setUname] = useState("");

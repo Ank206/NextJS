@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-const Profile = ({ params }: any) => {
+const Profile: React.FC = ({ params }: any) => {
   return (
     <div>
       <h1 className="font-mono text-2xl m-2">Profile Page</h1>
