@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Toast } from "react-hot-toast";
 
-const page = () => {
+const Page: React.FC = () => {
   const router = useRouter();
   const handleHomeClick = () => {
     setLoading(true);
@@ -84,4 +84,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
