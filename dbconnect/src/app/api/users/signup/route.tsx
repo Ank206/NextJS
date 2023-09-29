@@ -41,11 +41,12 @@ export async function POST(request: NextRequest) {
 
     // TODO: Send Verfication EMail
 
-    // await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
+    await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
 
     return NextResponse.json({
       message: "User created successfully",
       success: true,
+      id: savedUser._id,
       savedUser,
     });
   } catch (error: any) {
