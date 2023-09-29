@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-// import { sendEmail } from "@/helpers/mailer";
+import { sendEmail } from "@/helpers/mailer";
 
 const Profile: React.FC = () => {
   const router = useRouter();
@@ -19,7 +19,7 @@ const Profile: React.FC = () => {
 
   const handleMail = async () => {
     console.log("Handle Mail", uname, data);
-    // sendEmail({ uname, emailType: "VERIFY", userId: data });
+    sendEmail({ uname, emailType: "VERIFY", userId: data });
   };
 
   const logout = async () => {
