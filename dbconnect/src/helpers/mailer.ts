@@ -53,7 +53,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       }</p>`,
     };
 
-    await transport.sendMail(mailOptions);
+    return transport.sendMail(mailOptions);
   } catch (error: any) {
     console.log("Mailin Error - ", error);
     // throw new Error(error.message);
