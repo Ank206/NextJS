@@ -11,5 +11,9 @@ export const getDataFromToken = (request: NextRequest) => {
       process.env.SECRET_TOKEN!
     );
     return encodedToken;
-  } catch (error: any) {}
+  } catch (error: any) {
+    return {
+      message: "Error in the getDataFromToken",
+    };
+  }
 };
