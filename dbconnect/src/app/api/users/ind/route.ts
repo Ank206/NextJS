@@ -7,7 +7,7 @@ connect();
 
 export async function GET(params: NextRequest) {
   try {
-    const tokenData = getDataFromToken(params);
+    const tokenData = await getDataFromToken(params);
     // const userData = await User.findOne({ _id: tokenData }).select("-password");
     return NextResponse.json({
       message: `User found ${tokenData}`,
