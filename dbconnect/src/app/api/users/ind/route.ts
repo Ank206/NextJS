@@ -10,13 +10,14 @@ export async function GET(params: NextRequest) {
     const tokenData = await getDataFromToken(params);
     const userData = await User.findOne({ _id: tokenData }).select("-password");
     return NextResponse.json({
-      message: "User found",
+      message: `User found ${tokenData}`,
       data: userData,
     });
   } catch (error: any) {
     return NextResponse.json(
       {
-        error: error.message,
+        // error: error.message,
+        error: "Error at api/user/ind",
       },
       { status: 400 }
     );
