@@ -10,7 +10,7 @@ export async function getDataFromToken(request: NextRequest) {
       encodedToken,
       process.env.SECRET_TOKEN!
     );
-    return encodedToken;
+    return decodedToken.id;
   } catch (error: any) {
     return {
       message: "Error in the getDataFromToken",
