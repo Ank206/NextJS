@@ -10,6 +10,6 @@ export const getDataFromToken = (request: NextRequest) => {
       encodedToken,
       process.env.SECRET_TOKEN!
     );
-    return decodedToken.id;
+    return decodedToken;
   } catch (error: any) {}
 };
