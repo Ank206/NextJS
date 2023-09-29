@@ -6,7 +6,6 @@
 import nodemailer from "nodemailer";
 import User from "@/models/usermodel";
 import bcryptjs from "bcryptjs";
-import { constrainedMemory } from "process";
 
 export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
@@ -54,10 +53,9 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       }</p>`,
     };
 
-    const mailResponse = await transport.sendMail(mailOptions);
-    return mailResponse;
+    await transport.sendMail(mailOptions);
   } catch (error: any) {
     console.log("Mailin Error - ", error);
-    throw new Error(error.message);
+    // throw new Error(error.message);
   }
 };

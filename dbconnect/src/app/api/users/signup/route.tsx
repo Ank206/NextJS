@@ -1,6 +1,7 @@
 import { connect } from "@/dbConfig/dbConfig";
 import { sendEmail } from "@/helpers/mailer";
 import User from "@/models/usermodel";
+import axios from "axios";
 import bcryptjs from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -41,7 +42,14 @@ export async function POST(request: NextRequest) {
 
     // TODO: Send Verfication EMail
 
-    // await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
+    try {
+      await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
+    } catch (error: any) {
+      return NextResponse.json(
+        { error: `error at sendEmail ${error}` },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
       message: "User created successfully",
@@ -51,6 +59,9 @@ export async function POST(request: NextRequest) {
     });
   } catch (error: any) {
     console.log(error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "error at api/users/signup" },
+      { status: 500 }
+    );
   }
 }
