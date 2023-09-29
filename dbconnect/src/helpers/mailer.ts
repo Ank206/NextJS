@@ -17,8 +17,32 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       us.verifyToken = hashedToken;
       us.verifyTokenExpiry = Date.now() + 3600000;
 
-      await us.save();
+      // await us.save();
+      const transport = nodemailer.createTransport({
+        host: "sandbox.smtp.mailtrap.io",
+        port: 2525,
+        auth: {
+          user: process.env.NODEM_USER,
+          pass: process.env.NODEM_PASS,
+        },
+      });
 
+      const mailOptions = {
+        from: "akapoor1_be22@thapar.edu",
+        to: email,
+        subject:
+          emailType == "VERIFY"
+            ? "For e-mail verification"
+            : "For Password updation",
+        html: `<p>Click <a href="${
+          process.env.domain
+        }/verifyemail?token=${hashedToken}">here</a> to ${
+          emailType == "VERIFY" ? "verify email" : "update password"
+        }</p>`,
+      };
+
+      transport.sendMail(mailOptions);
+      await us.save();
       // console.log("If block implemented");
       // console.log("Object ID is : ", userId);
       // console.log(us);
@@ -29,31 +53,6 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
         forgotPasswordTokenExpiry: Date.now() + 36000000,
       });
     }
-
-    const transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
-      auth: {
-        user: process.env.NODEM_USER,
-        pass: process.env.NODEM_PASS,
-      },
-    });
-
-    const mailOptions = {
-      from: "akapoor1_be22@thapar.edu",
-      to: email,
-      subject:
-        emailType == "VERIFY"
-          ? "For e-mail verification"
-          : "For Password updation",
-      html: `<p>Click <a href="${
-        process.env.domain
-      }/verifyemail?token=${hashedToken}">here</a> to ${
-        emailType == "VERIFY" ? "verify email" : "update password"
-      }</p>`,
-    };
-
-    return transport.sendMail(mailOptions);
   } catch (error: any) {
     console.log("Mailin Error - ", error);
     // throw new Error(error.message);

@@ -46,8 +46,8 @@ export async function POST(request: NextRequest) {
       await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
     } catch (error: any) {
       return NextResponse.json(
-        { error: `error at sendEmail ${error}` },
-        { status: 500 }
+        { error: `error at sendEmail ${error}` }
+        // { status: 500 }
       );
     }
 
