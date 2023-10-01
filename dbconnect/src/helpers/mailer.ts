@@ -26,6 +26,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
           pass: process.env.NODEM_PASS,
         },
         secure: false,
+        authMethod: "PLAIN",
       });
 
       const mailOptions = {
