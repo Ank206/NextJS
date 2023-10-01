@@ -23,13 +23,14 @@ const Page: React.FC = () => {
   const [loading, setLoading] = React.useState(false);
 
   const onSignUp = async () => {
+    var response;
     try {
       setLoading(true);
-      const response = await axios.post("api/users/signup", user);
+      response = await axios.post("api/users/signup", user);
       console.log("SignUp success", response.data);
       router.push("/profile");
     } catch (error: any) {
-      console.log("SignUp failed -", error);
+      console.log("SignUp failed -", response, error);
     } finally {
       setLoading(false);
     }
