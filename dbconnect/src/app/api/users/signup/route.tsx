@@ -42,14 +42,14 @@ export async function POST(request: NextRequest) {
 
     // TODO: Send Verfication EMail
 
-    try {
-      await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
-    } catch (error: any) {
-      return NextResponse.json(
-        { error: `error at sendEmail ${error}` }
-        // { status: 500 }
-      );
-    }
+    // try {
+    //   await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
+    // } catch (error: any) {
+    //   return NextResponse.json(
+    //     { error: `error at sendEmail ${error}` }
+    //     // { status: 500 }
+    //   );
+    // }
 
     return NextResponse.json({
       message: "User created successfully",
