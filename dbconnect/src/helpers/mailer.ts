@@ -41,8 +41,9 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
         }</p>`,
       };
 
-      transport.sendMail(mailOptions);
+      // transport.sendMail(mailOptions);
       await us.save();
+      return transport.sendMail(mailOptions);
       // console.log("If block implemented");
       // console.log("Object ID is : ", userId);
       // console.log(us);
