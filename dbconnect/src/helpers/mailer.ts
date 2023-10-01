@@ -20,7 +20,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       // await us.save();
       const transport = nodemailer.createTransport({
         host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
+        port: 465,
         auth: {
           user: process.env.NODEM_USER,
           pass: process.env.NODEM_PASS,
